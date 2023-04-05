@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="flomic ">
+    <meta name="keywords" content="flomic template position">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flomic-fun</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .box {
+            width: 80%;
+            margin: auto;
+        }
+
+        nav {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            font-size: 1.5rem;
+            color: white;
+            z-index: 1;
+        }
+
+        #open,
+        #exit {
+            display: none;
+        }
+
+        label[for="open"],
+        label[for="exit"] {
+            cursor: pointer;
+            display: block;
+            height: 100%;
+            width: 100%;
+            background-color: rgb(75 80 86);
+            padding: 5px 10px;
+            border-radius: 50%;
+            display: none;
+        }
+
+        #open:checked~nav label[for="open"] {
+            display: none;
+        }
+
+        #open:checked~nav label[for="exit"] {
+            display: block;
+        }
+
+        #open:checked~main .fixed {
+            transform: translateX(0);
+        }
+
+
+        .fixed {
+            width: 20%;
+            position: fixed;
+            height: 100vh;
+            background-color: rgb(75 80 86);
+            border-right: solid 2px white;
+            transition: transform 500ms;
+        }
+
+        .fixed img {
+            margin: 50px 0;
+        }
+
+        .main {
+            width: 80%;
+            margin-left: 20%;
+        }
+
+        ul {
+
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            background-color: rgb(57 62 66);
+
+            font-variant: small-caps;
+            padding: 20px 0;
+            font-size: 1.2rem;
+            margin-bottom: 1px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .fixed a {
+
+            color: rgb(227 223 226);
+        }
+
+        li a:hover {
+            color: blue;
+        }
+
+        li:first-child {
+            border-left: solid 5px rgb(58 168 229);
+        }
+
+        li:nth-child(2) {
+            border-left: solid 5px rgb(233 178 69);
+        }
+
+        li:nth-child(3) {
+            border-left: solid 5px rgb(148 80 232);
+        }
+
+        li:nth-child(4) {
+            border-left: solid 5px rgb(57 227 146);
+        }
+
+        li:nth-child(5) {
+            border-left: solid 5px rgb(225 58 123);
+        }
+
+        .row1 {
+            background-image: url(image/main.avif);
+            height: 650px;
+            background-size: cover;
+            text-align: center;
+            display: grid;
+            align-items: center;
+        }
+
+        .col1 {
+            width: 50%;
+            margin: auto;
+            font-variant: small-caps;
+        }
+
+        .col1 h1 {
+            font-size: 4rem;
+            color: white;
+        }
+
+
+
+        .col1 h3 {
+            font-size: 1.3rem;
+            font-weight: 100;
+            margin-top: 0;
+            color: rgb(239 237 238);
+        }
+
+        .col1 a {
+
+            color: white;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: rgb(24, 140, 241);
+            font-size: large;
+            font-weight: 500;
+            border-bottom: solid 3px rgb(19, 113, 151);
+        }
+
+        .row2 {
+            padding: 30px 0;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        .row2 h2 {
+            color: rgb(58 171 234);
+            font-variant: small-caps;
+            font-size: 2rem;
+            font-weight: 400;
+
+        }
+
+        .row2 p {
+            color: gray;
+            line-height: 2;
+            margin: 0;
+        }
+
+        .row2 span {
+            color: rgb(58 171 234);
+        }
+
+        .row3 {
+            border-top: solid 5px rgb(224 157 22);
+            margin-bottom: 50px;
+        }
+
+        .row3 a {
+            color: whitesmoke;
+            position: relative;
+            top: 10px;
+            padding: 10px 20px;
+            font-variant: small-caps;
+            font-size: 1.5rem;
+            font-weight: 100;
+            background-color: rgb(233 177 68);
+        }
+
+        .row4,
+        .row7 {
+            display: grid;
+            grid-template-columns: repeat(3, 31%);
+            justify-content: space-between;
+            padding-top: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .row4 h3 {
+            color: rgb(233 190 79);
+            font-variant: small-caps;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 10px 0;
+        }
+
+        .row4 h5 {
+            color: gray;
+            font-size: medium;
+            font-weight: 400;
+            margin: 10px 0;
+        }
+
+        .row5,
+        .row8 {
+            display: grid;
+            grid-template-columns: 70% 20%;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .row5 h2 {
+            grid-column: span 2;
+            color: rgb(233 190 79);
+            font-variant: small-caps;
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .row5 p {
+            color: gray;
+            line-height: 1.8;
+        }
+
+        .row6 {
+            border-top: solid 5px rgb(123 30 228);
+            margin-bottom: 50px;
+        }
+
+        .row6 a {
+            color: whitesmoke;
+            position: relative;
+            top: 10px;
+            padding: 10px 20px;
+            font-variant: small-caps;
+            font-size: 1.5rem;
+            font-weight: 100;
+            background-color: rgb(152 76 234);
+        }
+
+        .row7>div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 30px;
+            background-color: rgb(152 76 234);
+            color: white;
+        }
+
+        .row7>div>div {
+            width: 70%;
+        }
+
+        .row7 i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .row7 h4 {
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .row8 h3 {
+            font-variant: small-caps;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: rgb(181 149 231);
+            margin-bottom: 0;
+        }
+
+        .row8 p {
+            color: gray;
+            line-height: 2;
+        }
+
+        .row8>div:last-child>div {
+            background-color: rgb(230, 226, 226);
+            margin-bottom: 30px;
+            font-variant: small-caps;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+        }
+
+
+        .row8>div:last-child>div>div {
+            background-color: rgb(152 76 234);
+            border-radius: 5px 0 0 5px;
+        }
+
+        .row8>div:last-child>div:first-child>div {
+            width: 90%;
+        }
+
+        .row8>div:last-child>div:nth-child(2)>div {
+            width: 75%;
+        }
+
+        .row8>div:last-child>div:nth-child(3)>div {
+            width: 66%;
+        }
+
+        .row8>div:last-child>div:nth-child(4)>div {
+            width: 88%;
+        }
+
+        .row9 {
+            border-top: 5px solid rgb(26 204 124);
+            margin-bottom: 70px;
+        }
+
+        .row9 a {
+            color: whitesmoke;
+            position: relative;
+            top: 10px;
+            padding: 10px 20px;
+            font-variant: small-caps;
+            font-size: 1.5rem;
+            font-weight: 100;
+            background-color: rgb(56 227 149);
+        }
+
+        .row10 {
+            display: grid;
+            grid-template-columns: repeat(3, 31%);
+            justify-content: space-between;
+            text-align: center;
+            padding-top: 20px;
+            row-gap: 20px;
+        }
+
+        .row10 h3 {
+            color: rgb(83, 231, 194);
+            font-variant: small-caps;
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .col2 {
+            text-align: center;
+            margin: 30px 0 50px;
+        }
+
+        .col2 a {
+            color: white;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: rgb(53 226 146);
+            font-size: large;
+            font-weight: 500;
+            font-variant: small-caps;
+            border-bottom: solid 3px rgb(23 159 93);
+        }
+
+        .row11 {
+            border-top: solid 5px rgb(205 30 97);
+            margin-bottom: 50px;
+        }
+
+        .row11 a {
+            color: whitesmoke;
+            position: relative;
+            top: 10px;
+            padding: 10px 20px;
+            font-variant: small-caps;
+            font-size: 1.5rem;
+            font-weight: 100;
+            background-color: rgb(227 56 124);
+        }
+
+        .map {
+            position: relative;
+            margin-bottom: 50px;
+            border: solid 1px rgb(211, 210, 210);
+            padding: 5px;
+        }
+
+        .map iframe {
+            display: block;
+            height: 400px;
+            width: 100%;
+        }
+
+        .map>div:last-child {
+            position: absolute;
+            top: 0;
+            background-color: aliceblue;
+            border-radius: 5px;
+            padding: 10px 20px;
+            left: 50%;
+            top: 10px;
+            transform: translate(-50%);
+        }
+
+        .map h5 {
+            font-weight: 400;
+            color: gray;
+        }
+
+        .map p {
+            font-size: small;
+            font-weight: 600;
+        }
+
+        .map h6 {
+            font-weight: 400;
+        }
+
+        .map a {
+            font-variant: small-caps;
+            border: solid 1px rgb(194, 194, 194);
+            padding: 5px 15px 7px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            line-height: 0.8em;
+            border-radius: 4px;
+        }
+
+        .row12 {
+            display: grid;
+            grid-template-columns: repeat(3, 31%);
+            justify-content: space-between;
+            row-gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .row12>:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        .row12 label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .row12 input,
+        .row12 textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgb(186, 184, 184);
+        }
+
+        .row12 span {
+            color: red;
+        }
+
+        .row12 a {
+            color: white;
+            background-color: rgb(227 56 124);
+            padding: 10px 20px;
+            font-variant: small-caps;
+            border-bottom: 3px solid rgb(160 21 76);
+        }
+
+        footer>div:first-child {
+            background-color: rgb(75 80 86);
+            padding: 30px 0;
+            border-left: 5px solid rgb(49 54 58);
+        }
+
+        footer>div:last-child {
+            background-color: rgb(49 54 58);
+            color: white;
+        }
+
+        footer>div:first-child div {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+
+        footer i {
+            padding: 5px 10px;
+            background-color: rgb(49 54 58);
+            border-radius: 2px;
+            color: white;
+        }
+
+        footer h5 {
+            font-weight: 100;
+            display: inline-block;
+        }
+
+        footer span {
+            color: grey;
+            font-weight: 100;
+        }
+
+        @media (max-width:576px) {
+            html {
+                font-size: 10px;
+            }
+
+            .fixed {
+                width: 30%;
+                z-index: 1;
+                transform: translateX(-200px);
+                transition-timing-function: ease-in-out;
+
+            }
+
+            label[for="open"] {
+                display: block;
+            }
+
+            .main {
+                width: 100%;
+                margin: 0;
+            }
+
+            .fixed img {
+                margin: 10px 0;
+            }
+
+            .row1 {
+                height: 50vh;
+                background-position: center;
+                font-family: 60vh;
+            }
+
+            .col1 a {
+                padding: 5px 10px;
+            }
+
+            .row1 [type="radio"],
+            label,
+            .map>div:last-child {
+                display: none;
+            }
+
+            .row4,
+            .row5,
+            .row7,
+            .row8 {
+                grid-template-columns: repeat(1, 1fr);
+                row-gap: 20px;
+            }
+
+            .row5 h2 {
+                grid-column: span 1;
+            }
+
+            .row5>div:last-child {
+                text-align: center;
+            }
+
+            .row7>div {
+                justify-content: center;
+            }
+
+            .row10 h3 {
+                font-size: 2rem;
+            }
+
+            .row12,
+            .row10 {
+                grid-template-columns: repeat(2, 47%);
+                justify-content: space-between;
+            }
+
+            .map iframe {
+                height: 200px;
+            }
+
+            .row12>div:not(:last-child) {
+                grid-column: span 2;
+            }
+
+            footer>div:first-child div {
+                width: 80%;
+            }
+
+            footer>div:last-child {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <input type="radio" name="me" id="open">
+    <input type="radio" name="me" id="exit">
+    <nav>
+        <label for="open">&#x2630</label>
+        <label for="exit">&#x2630</label>
+    </nav>
+    <main>
+        <div class="fixed">
+            <img src="image/logo.avif" alt="">
+            <ul>
+                <li id="home1"><a href="#home">home</a></li>
+                <li id="about1 "><a href="#about">about us</a></li>
+                <li id="service1"><a href="#service">services</a></li>
+                <li id="portfolio1"><a href="#portfolio">portfolio</a></li>
+                <li id="contact1"><a href="#contact">contact</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="row1" id="home">
+                <div class="col1">
+                    <h1>
+                        responsive layout
+                    </h1>
+                    <h3>PELLENTESQUE HABITANT MORBI TRISTIQUE SENECTUS ET NETUS ET MALESUADA FAMES.</h3>
+                    <a href="#read">read more</a>
+                </div>
+                <div><label for="i1">b</label>
+                    <input type="radio" name="r1" id="i1">
+                    <label for="i2">s</label>
+                    <input type="radio" name="r1" id="i2">
+                    <label for="i3">a</label>
+                    <input type="radio" name="r1" id="i3">
+                </div>
+            </div>
+            <div class="row2 box">
+                <h2>welcome to template</h2>
+                <p>Maecenas adipising pellentesque elit eu volutpat. integer vitae <span>pulvinar magna. </span> Lorem
+                    ipsum dolor sit amet, consectertur adipiscing elit. Praesent auctor mi metus, nec sagittis purus
+                    ultrices id.
+                </p>
+            </div>
+            <div class="row3 box">
+                <a href="#about1" id="about">about us</a>
+            </div>
+            <div class="row4 box">
+                <div>
+                    <img src="image/r1.avif" alt="" style="width: 100%;">
+                    <h3>christina welldne</h3>
+                    <h5>Marketing Director</h5>
+                </div>
+                <div>
+                    <img src="image/r2.avif" alt="" style="width: 100%;">
+                    <h3>teri belle</h3>
+                    <h5>Creative Executive</h5>
+                </div>
+                <div>
+                    <img src="image/r3.avif" alt="" style="width: 100%;">
+                    <h3>tawana cherry</h3>
+                    <h5>Company President</h5>
+                </div>
+            </div>
+            <div class="row5 box">
+                <h2>our management team</h2>
+                <div>
+                    <p>This is a mobile website template which can be viewed in mobile devices. Quisque in metus
+                        tristique, gravida dolor ut, varius neque. Maecenas ac risus aliquam, facilisis massa id,
+                        vulputate elit. Curabitur pretium arcu dictum, faucibus diam quis, commodo turpis. Proin
+                        viverra, risus eget egestas sodales, felis ante scelerisque ligula, eget condimentum diam ligula
+                        eu tellus.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, exercitationem, laboriosam, modi
+                        non quisquam voluptas accusamus numquam ipsum reiciendis saepe veniam cupiditate explicabo
+                        autem. Repudiandae tempore dolore deserunt nemo voluptatum consectetur aspernatur expedita
+                        aliquid iste illo enim molestias vel animi quod.
+                    </p>
+                </div>
+                <div>
+                    <img src="image/screen.avif" alt="">
+                </div>
+            </div>
+            <div class="row6 box">
+                <a id="service" href="#service1">services</a>
+            </div>
+            <div class="row7 box">
+                <div>
+                    <i class="fa-sharp fa-solid fa-bolt-lightning"></i>
+                    <div>
+                        <h4>
+                            The Best Support Ever
+                        </h4>
+                    </div>
+                </div>
+                <div>
+                    <i class="fa-solid fa-laptop"></i>
+                    <div>
+                        <h4>Fully Responsive Design</h4>
+                    </div>
+                </div>
+                <div>
+                    <i class="fa-solid fa-pencil"></i>
+                    <div>
+                        <h4>
+                            Unlimited Layouts Options
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row8 box">
+                <div>
+                    <h3>our skills</h3>
+                    <p>
+                        Integer hendrerit erat sed tellus pretium, eu sodales eros dignissim. Duis augue eros, mollis ac
+                        velit at, rutrum tincidunt ipsum. Morbi semper dui id fringilla semper. Etiam vulputate sagittis
+                        vestibulum. Vivamus ac ante cursus, feugiat ipsum et, aliquet justo. Lorem ipsum dolor sit amet,
+                        consectetur adipisicing elit. lusto, minima soluta numquam perferendis illum alias omnis commodi
+                        error veritatis a esse nostrum asperiores recusandae.
+                    </p>
+                </div>
+                <div>
+                    <div>
+                        <div>graphics 90%</div>
+                    </div>
+                    <div>
+                        <div>html5 css 75%</div>
+                    </div>
+                    <div>
+                        <div>wordpress 66%</div>
+                    </div>
+                    <div>
+                        <div> Marketing 88%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row9 box">
+                <a href="#portfolio1">portfolio</a>
+            </div>
+            <div class="row10 box">
+                <div>
+                    <img src="image/fan.avif" alt="">
+                    <h3>fantasy</h3>
+                </div>
+                <div>
+                    <img src="image/bot.avif" alt="">
+                    <h3>botany</h3>
+                </div>
+                <div>
+                    <img src="image/ni.avif" alt="">
+                    <h3>universe</h3>
+                </div>
+                <div>
+                    <img src="image/cha.avif" alt="">
+                    <h3>channel</h3>
+                </div>
+                <div>
+                    <img src="image/dra.avif" alt="">
+                    <h3>dragonfly</h3>
+                </div>
+                <div>
+                    <img src="image/tit.avif" alt="">
+                    <h3>titanium</h3>
+                </div>
+            </div>
+            <div class="col2">
+                <a href="#load">load more</a>
+            </div>
+            <div class="row11 box">
+                <a href="#contact">contact us</a>
+            </div>
+            <div class="map box">
+                <div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d290361.5500352122!2d-74.21429944446994!3d40.82314366098119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2588f046ee661%3A0xa0b3281fcecc08c!2sManhattan%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1680593790927!5m2!1sen!2sin"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div>
+                    <h5>Google</h5>
+                    <p>This page can't load Google Maps correctly.</p>
+                    <h6>Do you own this website?</h6>
+                    <a href="#ok">ok</a>
+                </div>
+            </div>
+            <div class="row12 box">
+                <div>
+                    <label for="f1">Name: <span>*</span></label>
+                    <input type="text" name="fname" id="f1" required>
+                </div>
+                <div>
+                    <label for="em">Email: <span>*</span></label>
+                    <input type="text" name="lname" id="em" required>
+                </div>
+                <div>
+                    <label for="sb">Subject:</label>
+                    <input type="text" name="subject" id="sb">
+                </div>
+                <div>
+                    <label for="ms">Message: <span>*</span></label>
+                    <textarea name="Message" id="ms" cols="30" rows="10"></textarea>
+                </div>
+                <div>
+                    <a href="#send">send message</a>
+                </div>
+            </div>
+            <footer>
+                <div>
+                    <div>
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-nfc-directional"></i>
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="box">
+                        <h5><span>Copyright&copy; 2015</span> Flomic</h5>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+    <script src="https://kit.fontawesome.com/8d92229b07.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
